@@ -1,0 +1,627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище GlKnigKlubModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Korzina">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Polz" Type="int" Nullable="false" />
+          <Property Name="DateZakaz" Type="date" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Sale" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ID_Status" Type="int" Nullable="false" />
+          <Property Name="SrokVidach" Type="int" Nullable="false" />
+          <Property Name="Kod" Type="int" />
+        </EntityType>
+        <EntityType Name="Polz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fio" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_Role" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostavkaTovara">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID_Tovar" Type="int" Nullable="false" />
+          <Property Name="KolVo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proizvoditel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatusTovara">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatusZakaz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tovar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Opisanie" Type="nvarchar" MaxLength="450" />
+          <Property Name="Prise" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Sale" Type="int" />
+          <Property Name="ID_Proizvoditel" Type="int" Nullable="false" />
+          <Property Name="ID_Status" Type="int" Nullable="false" />
+          <Property Name="Ostatok" Type="int" />
+        </EntityType>
+        <EntityType Name="Zakaz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Tovar" Type="int" Nullable="false" />
+          <Property Name="ID_Korzina" Type="int" Nullable="false" />
+          <Property Name="KolVoTovar" Type="int" Nullable="false" />
+          <Property Name="Sum" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Korzina_Polz">
+          <End Role="Polz" Type="Self.Polz" Multiplicity="1" />
+          <End Role="Korzina" Type="Self.Korzina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polz">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Korzina">
+              <PropertyRef Name="ID_Polz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Korzina_StatusZakaz">
+          <End Role="StatusZakaz" Type="Self.StatusZakaz" Multiplicity="1" />
+          <End Role="Korzina" Type="Self.Korzina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusZakaz">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Korzina">
+              <PropertyRef Name="ID_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polz_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Polz" Type="Self.Polz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Polz">
+              <PropertyRef Name="ID_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostavkaTovara_Tovar">
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+          <End Role="PostavkaTovara" Type="Self.PostavkaTovara" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PostavkaTovara">
+              <PropertyRef Name="ID_Tovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovar_Proizvoditel">
+          <End Role="Proizvoditel" Type="Self.Proizvoditel" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvoditel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="ID_Proizvoditel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovar_StatusTovara">
+          <End Role="StatusTovara" Type="Self.StatusTovara" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusTovara">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="ID_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Korzina">
+          <End Role="Korzina" Type="Self.Korzina" Multiplicity="1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korzina">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="ID_Korzina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Tovar">
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="ID_Tovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище GlKnigKlubModelContainer">
+          <EntitySet Name="Korzina" EntityType="Self.Korzina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Polz" EntityType="Self.Polz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostavkaTovara" EntityType="Self.PostavkaTovara" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proizvoditel" EntityType="Self.Proizvoditel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusTovara" EntityType="Self.StatusTovara" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusZakaz" EntityType="Self.StatusZakaz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tovar" EntityType="Self.Tovar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zakaz" EntityType="Self.Zakaz" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Korzina_Polz" Association="Self.FK_Korzina_Polz">
+            <End Role="Polz" EntitySet="Polz" />
+            <End Role="Korzina" EntitySet="Korzina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Korzina_StatusZakaz" Association="Self.FK_Korzina_StatusZakaz">
+            <End Role="StatusZakaz" EntitySet="StatusZakaz" />
+            <End Role="Korzina" EntitySet="Korzina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polz_Role" Association="Self.FK_Polz_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Polz" EntitySet="Polz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostavkaTovara_Tovar" Association="Self.FK_PostavkaTovara_Tovar">
+            <End Role="Tovar" EntitySet="Tovar" />
+            <End Role="PostavkaTovara" EntitySet="PostavkaTovara" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovar_Proizvoditel" Association="Self.FK_Tovar_Proizvoditel">
+            <End Role="Proizvoditel" EntitySet="Proizvoditel" />
+            <End Role="Tovar" EntitySet="Tovar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovar_StatusTovara" Association="Self.FK_Tovar_StatusTovara">
+            <End Role="StatusTovara" EntitySet="StatusTovara" />
+            <End Role="Tovar" EntitySet="Tovar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Korzina" Association="Self.FK_Zakaz_Korzina">
+            <End Role="Korzina" EntitySet="Korzina" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Tovar" Association="Self.FK_Zakaz_Tovar">
+            <End Role="Tovar" EntitySet="Tovar" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GlKnigKlubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Korzina">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Polz" Type="Int32" Nullable="false" />
+          <Property Name="DateZakaz" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Sum" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Sale" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ID_Status" Type="Int32" Nullable="false" />
+          <Property Name="SrokVidach" Type="Int32" Nullable="false" />
+          <Property Name="Kod" Type="Int32" />
+          <NavigationProperty Name="Polz" Relationship="Self.FK_Korzina_Polz" FromRole="Korzina" ToRole="Polz" />
+          <NavigationProperty Name="StatusZakaz" Relationship="Self.FK_Korzina_StatusZakaz" FromRole="Korzina" ToRole="StatusZakaz" />
+          <NavigationProperty Name="Zakazs" Relationship="Self.FK_Zakaz_Korzina" FromRole="Korzina" ToRole="Zakaz" />
+        </EntityType>
+        <EntityType Name="Polz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fio" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_Role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Korzinas" Relationship="Self.FK_Korzina_Polz" FromRole="Polz" ToRole="Korzina" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Polz_Role" FromRole="Polz" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="PostavkaTovara">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID_Tovar" Type="Int32" Nullable="false" />
+          <Property Name="KolVo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tovar" Relationship="Self.FK_PostavkaTovara_Tovar" FromRole="PostavkaTovara" ToRole="Tovar" />
+        </EntityType>
+        <EntityType Name="Proizvoditel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tovars" Relationship="Self.FK_Tovar_Proizvoditel" FromRole="Proizvoditel" ToRole="Tovar" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Polzs" Relationship="Self.FK_Polz_Role" FromRole="Role" ToRole="Polz" />
+        </EntityType>
+        <EntityType Name="StatusTovara">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tovars" Relationship="Self.FK_Tovar_StatusTovara" FromRole="StatusTovara" ToRole="Tovar" />
+        </EntityType>
+        <EntityType Name="StatusZakaz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Korzinas" Relationship="Self.FK_Korzina_StatusZakaz" FromRole="StatusZakaz" ToRole="Korzina" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tovar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Opisanie" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Prise" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Sale" Type="Int32" />
+          <Property Name="ID_Proizvoditel" Type="Int32" Nullable="false" />
+          <Property Name="ID_Status" Type="Int32" Nullable="false" />
+          <Property Name="Ostatok" Type="Int32" />
+          <NavigationProperty Name="PostavkaTovaras" Relationship="Self.FK_PostavkaTovara_Tovar" FromRole="Tovar" ToRole="PostavkaTovara" />
+          <NavigationProperty Name="Proizvoditel" Relationship="Self.FK_Tovar_Proizvoditel" FromRole="Tovar" ToRole="Proizvoditel" />
+          <NavigationProperty Name="StatusTovara" Relationship="Self.FK_Tovar_StatusTovara" FromRole="Tovar" ToRole="StatusTovara" />
+          <NavigationProperty Name="Zakazs" Relationship="Self.FK_Zakaz_Tovar" FromRole="Tovar" ToRole="Zakaz" />
+        </EntityType>
+        <EntityType Name="Zakaz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Tovar" Type="Int32" Nullable="false" />
+          <Property Name="ID_Korzina" Type="Int32" Nullable="false" />
+          <Property Name="KolVoTovar" Type="Int32" Nullable="false" />
+          <Property Name="Sum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Korzina" Relationship="Self.FK_Zakaz_Korzina" FromRole="Zakaz" ToRole="Korzina" />
+          <NavigationProperty Name="Tovar" Relationship="Self.FK_Zakaz_Tovar" FromRole="Zakaz" ToRole="Tovar" />
+        </EntityType>
+        <Association Name="FK_Korzina_Polz">
+          <End Role="Polz" Type="Self.Polz" Multiplicity="1" />
+          <End Role="Korzina" Type="Self.Korzina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polz">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Korzina">
+              <PropertyRef Name="ID_Polz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Korzina_StatusZakaz">
+          <End Role="StatusZakaz" Type="Self.StatusZakaz" Multiplicity="1" />
+          <End Role="Korzina" Type="Self.Korzina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusZakaz">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Korzina">
+              <PropertyRef Name="ID_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Korzina">
+          <End Role="Korzina" Type="Self.Korzina" Multiplicity="1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korzina">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="ID_Korzina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polz_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Polz" Type="Self.Polz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Polz">
+              <PropertyRef Name="ID_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostavkaTovara_Tovar">
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+          <End Role="PostavkaTovara" Type="Self.PostavkaTovara" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PostavkaTovara">
+              <PropertyRef Name="ID_Tovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovar_Proizvoditel">
+          <End Role="Proizvoditel" Type="Self.Proizvoditel" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvoditel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="ID_Proizvoditel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovar_StatusTovara">
+          <End Role="StatusTovara" Type="Self.StatusTovara" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusTovara">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="ID_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Tovar">
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="ID_Tovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GlEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Korzinas" EntityType="Self.Korzina" />
+          <EntitySet Name="Polzs" EntityType="Self.Polz" />
+          <EntitySet Name="PostavkaTovaras" EntityType="Self.PostavkaTovara" />
+          <EntitySet Name="Proizvoditels" EntityType="Self.Proizvoditel" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="StatusTovaras" EntityType="Self.StatusTovara" />
+          <EntitySet Name="StatusZakazs" EntityType="Self.StatusZakaz" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Tovars" EntityType="Self.Tovar" />
+          <EntitySet Name="Zakazs" EntityType="Self.Zakaz" />
+          <AssociationSet Name="FK_Korzina_Polz" Association="Self.FK_Korzina_Polz">
+            <End Role="Polz" EntitySet="Polzs" />
+            <End Role="Korzina" EntitySet="Korzinas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Korzina_StatusZakaz" Association="Self.FK_Korzina_StatusZakaz">
+            <End Role="StatusZakaz" EntitySet="StatusZakazs" />
+            <End Role="Korzina" EntitySet="Korzinas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Korzina" Association="Self.FK_Zakaz_Korzina">
+            <End Role="Korzina" EntitySet="Korzinas" />
+            <End Role="Zakaz" EntitySet="Zakazs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polz_Role" Association="Self.FK_Polz_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Polz" EntitySet="Polzs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostavkaTovara_Tovar" Association="Self.FK_PostavkaTovara_Tovar">
+            <End Role="Tovar" EntitySet="Tovars" />
+            <End Role="PostavkaTovara" EntitySet="PostavkaTovaras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovar_Proizvoditel" Association="Self.FK_Tovar_Proizvoditel">
+            <End Role="Proizvoditel" EntitySet="Proizvoditels" />
+            <End Role="Tovar" EntitySet="Tovars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovar_StatusTovara" Association="Self.FK_Tovar_StatusTovara">
+            <End Role="StatusTovara" EntitySet="StatusTovaras" />
+            <End Role="Tovar" EntitySet="Tovars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Tovar" Association="Self.FK_Zakaz_Tovar">
+            <End Role="Tovar" EntitySet="Tovars" />
+            <End Role="Zakaz" EntitySet="Zakazs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище GlKnigKlubModelContainer" CdmEntityContainer="GlEntities">
+          <EntitySetMapping Name="Korzinas">
+            <EntityTypeMapping TypeName="GlKnigKlubModel.Korzina">
+              <MappingFragment StoreEntitySet="Korzina">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Polz" ColumnName="ID_Polz" />
+                <ScalarProperty Name="DateZakaz" ColumnName="DateZakaz" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Sale" ColumnName="Sale" />
+                <ScalarProperty Name="ID_Status" ColumnName="ID_Status" />
+                <ScalarProperty Name="SrokVidach" ColumnName="SrokVidach" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Polzs">
+            <EntityTypeMapping TypeName="GlKnigKlubModel.Polz">
+              <MappingFragment StoreEntitySet="Polz">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Fio" ColumnName="Fio" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ID_Role" ColumnName="ID_Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostavkaTovaras">
+            <EntityTypeMapping TypeName="GlKnigKlubModel.PostavkaTovara">
+              <MappingFragment StoreEntitySet="PostavkaTovara">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Tovar" ColumnName="ID_Tovar" />
+                <ScalarProperty Name="KolVo" ColumnName="KolVo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proizvoditels">
+            <EntityTypeMapping TypeName="GlKnigKlubModel.Proizvoditel">
+              <MappingFragment StoreEntitySet="Proizvoditel">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="GlKnigKlubModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusTovaras">
+            <EntityTypeMapping TypeName="GlKnigKlubModel.StatusTovara">
+              <MappingFragment StoreEntitySet="StatusTovara">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusZakazs">
+            <EntityTypeMapping TypeName="GlKnigKlubModel.StatusZakaz">
+              <MappingFragment StoreEntitySet="StatusZakaz">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GlKnigKlubModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tovars">
+            <EntityTypeMapping TypeName="GlKnigKlubModel.Tovar">
+              <MappingFragment StoreEntitySet="Tovar">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Opisanie" ColumnName="Opisanie" />
+                <ScalarProperty Name="Prise" ColumnName="Prise" />
+                <ScalarProperty Name="Sale" ColumnName="Sale" />
+                <ScalarProperty Name="ID_Proizvoditel" ColumnName="ID_Proizvoditel" />
+                <ScalarProperty Name="ID_Status" ColumnName="ID_Status" />
+                <ScalarProperty Name="Ostatok" ColumnName="Ostatok" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zakazs">
+            <EntityTypeMapping TypeName="GlKnigKlubModel.Zakaz">
+              <MappingFragment StoreEntitySet="Zakaz">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Tovar" ColumnName="ID_Tovar" />
+                <ScalarProperty Name="ID_Korzina" ColumnName="ID_Korzina" />
+                <ScalarProperty Name="KolVoTovar" ColumnName="KolVoTovar" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

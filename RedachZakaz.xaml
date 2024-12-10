@@ -1,0 +1,32 @@
+﻿<Window x:Class="KnigKing.RedachZakaz"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KnigKing"
+        mc:Ignorable="d"
+        Title="Редактирование заказа" Height="450" Width="617" Background="#FFE2F0D9">
+    <Grid>
+        <DataGrid Name="ZakazDataGrid" Margin="10,52,26,10" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True"
+          ItemsSource="{Binding ZakazList}" IsReadOnly="False">
+            <!-- Столбец для отображения названия товара -->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название товара" Binding="{Binding Tovar.Name}" />
+
+                <!-- Столбец для отображения информации о корзине -->
+                <DataGridTextColumn Header="Дата заказа" Binding="{Binding Korzina.DateZakaz}" />
+
+                <!-- Столбец для отображения ФИО пользователя -->
+                <DataGridTextColumn Header="Пользователь" Binding="{Binding Korzina.Polz.Fio}" />
+
+                <!-- Столбец для отображения Статуса -->
+                <DataGridTextColumn Header="Статус" Binding="{Binding Korzina.StatusZakaz.Name}" />
+
+                <!-- Другие столбцы для отображения данных из Zakaz -->
+                <DataGridTextColumn Header="Количество" Binding="{Binding KolVoTovar}" />
+                <DataGridTextColumn Header="Сумма" Binding="{Binding Sum}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Вернуться" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="37" Width="87" Background="White" BorderBrush="#FF568C3F" Click="BackButton_Click"/>
+    </Grid>
+</Window>

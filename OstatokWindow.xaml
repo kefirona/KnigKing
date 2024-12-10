@@ -1,0 +1,20 @@
+﻿<Window x:Class="KnigKing.OstatokWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KnigKing"
+        mc:Ignorable="d"
+        Title="Остатки товара" Height="395" Width="572" Background="#FFE2F0D9">
+    <Grid>
+        <DataGrid Name="ZakazDataGrid" Margin="10,52,26,10" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True"
+                  ItemsSource="{Binding TovarList}" IsReadOnly="True" BorderBrush="#FF337F2C">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название товара" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Остаток" Binding="{Binding Ostatok}" />
+                <DataGridTextColumn Header="Статус" Binding="{Binding StatusTovara.Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Сделать поставку" HorizontalAlignment="Left" Margin="11,8,0,0" VerticalAlignment="Top" Height="31" Width="138" Background="White" BorderBrush="#FF257123" Click="Button_Click"/>
+    </Grid>
+</Window>

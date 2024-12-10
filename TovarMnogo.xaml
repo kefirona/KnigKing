@@ -1,0 +1,18 @@
+﻿<Window x:Class="KnigKing.TovarMnogo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KnigKing"
+        mc:Ignorable="d"
+        Title="Полное описание товаров" Height="357" Width="517" Background="#FFD0EDCB">
+    <Grid>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="280" Margin="10,10,0,0" VerticalAlignment="Top" Width="233"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="267,10,0,0" VerticalAlignment="Top" Width="200" Height="23" FontSize="14" BorderBrush="#FF265A10" SelectionBrush="#FF092F06" IsReadOnly="True"/>
+        <TextBox x:Name="authorTextBox" HorizontalAlignment="Left" Margin="267,38,0,0" VerticalAlignment="Top" Width="200" Height="23" FontSize="14" BorderBrush="#FF265A10" SelectionBrush="#FF092F06" IsReadOnly="True"/>
+        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="267,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="132" Width="200" Background="White" FontSize="14" IsHitTestVisible="False"/>
+        <TextBox x:Name="priceTextBox" HorizontalAlignment="Left" Margin="267,217,0,0" VerticalAlignment="Top" Width="92" Height="23" FontSize="14" BorderBrush="#FF265A10" SelectionBrush="#FF092F06" IsReadOnly="True"/>
+        <TextBox x:Name="saleTextBox" HorizontalAlignment="Left" Margin="375,217,0,0" VerticalAlignment="Top" Width="92" Height="23" FontSize="14" BorderBrush="#FF265A10" SelectionBrush="#FF092F06" IsReadOnly="True"/>
+        <Button Content="Добавить в корзину" HorizontalAlignment="Left" Margin="267,256,0,0" VerticalAlignment="Top" Height="32" Width="200" Background="#FF92D050" FontWeight="Bold" FontSize="14" BorderBrush="#FF76A93F"/>
+    </Grid>
+</Window>

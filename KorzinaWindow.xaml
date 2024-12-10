@@ -1,0 +1,17 @@
+﻿<Window x:Class="KnigKing.KorzinaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KnigKing"
+        mc:Ignorable="d"
+        Title="Корзина" Height="450" Width="368" Background="#FFD0EDCB">
+    <Grid>
+            <ListBox x:Name="ItemsListBox" Margin="10,10,10,56">
+            <!-- Здесь будут отображаться товары из корзины -->
+            </ListBox>
+            <Button Content="Оформить заказ" HorizontalAlignment="Left" Margin="216,383,0,0" VerticalAlignment="Top" Width="144" Click="PlaceOrder_Click"/>
+            <Label Content="Новый заказ" HorizontalAlignment="Left" Margin="10,383,0,0" VerticalAlignment="Top" Width="80"/>
+            <Button Content="Вернуться на главную" HorizontalAlignment="Left" Margin="214,408,0,0" VerticalAlignment="Top" Width="144" Click="Button_Click"/>
+    </Grid>
+</Window>

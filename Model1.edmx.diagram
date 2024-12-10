@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a260ebeae3404ec583c94a06cc72997d" Name="Diagram1">
+        <EntityTypeShape EntityType="GlKnigKlubModel.Korzina" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GlKnigKlubModel.Polz" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GlKnigKlubModel.PostavkaTovara" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="GlKnigKlubModel.Proizvoditel" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GlKnigKlubModel.Role" Width="1.5" PointX="1.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GlKnigKlubModel.StatusTovara" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GlKnigKlubModel.StatusZakaz" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GlKnigKlubModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GlKnigKlubModel.Tovar" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GlKnigKlubModel.Zakaz" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="GlKnigKlubModel.FK_Korzina_Polz" ManuallyRouted="false" />
+        <AssociationConnector Association="GlKnigKlubModel.FK_Korzina_StatusZakaz" ManuallyRouted="false" />
+        <AssociationConnector Association="GlKnigKlubModel.FK_Zakaz_Korzina" ManuallyRouted="false" />
+        <AssociationConnector Association="GlKnigKlubModel.FK_Polz_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="GlKnigKlubModel.FK_PostavkaTovara_Tovar" ManuallyRouted="false" />
+        <AssociationConnector Association="GlKnigKlubModel.FK_Tovar_Proizvoditel" ManuallyRouted="false" />
+        <AssociationConnector Association="GlKnigKlubModel.FK_Tovar_StatusTovara" ManuallyRouted="false" />
+        <AssociationConnector Association="GlKnigKlubModel.FK_Zakaz_Tovar" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
